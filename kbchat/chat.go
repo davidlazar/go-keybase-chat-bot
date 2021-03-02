@@ -308,6 +308,18 @@ func (a *API) EditByConvID(convID chat1.ConvIDStr, msgID chat1.MessageID, text s
 	return a.doSend(arg)
 }
 
+func (a *API) EditByChannel(channel chat1.ChatChannel, msgID chat1.MessageID, text string) (SendResponse, error) {
+	arg := reactionArg{
+		Method: "edit",
+		Params: reactionParams{Options: reactionOptions{
+			Message: sendMessageBody{Body: text},
+			MsgID:   msgID,
+			Channel: channel,
+		}},
+	}
+	return a.doSend(arg)
+}
+
 ////////////////////////////////////////////////////////
 // Manage channels /////////////////////////////////////
 ////////////////////////////////////////////////////////
